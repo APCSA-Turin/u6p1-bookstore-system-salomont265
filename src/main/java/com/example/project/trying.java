@@ -15,6 +15,7 @@ public class trying{
             System.out.println("Press 1 To add book to library");
             System.out.println("Press 2 To add more of the book ot library");
             System.out.println("Press 3 To search for a book");
+            System.out.println("Press 4 To show  all books");
             System.out.println("Press 5 To register a student");
             System.out.println("Press 6 To show all students");
             System.out.println("Press 7 To check out a book");
@@ -175,7 +176,7 @@ public class trying{
                 if(have){
                     //create book variable using index
                     Book bookWanted = books[index];
-                    bookWanted.setQuantity(1);
+                   Book bookWantedUser = new Book(bookWanted.getTitle(),bookWanted.getAuthor(),bookWanted.getYearPublished(),bookWanted.getIsbn(),1);
                     System.out.println("We have that book!");
                     //create book list of user
                     Book[] booksUser = user.getBooks();
@@ -183,22 +184,22 @@ public class trying{
                     Book[] books2 = new Book[5 ];
                     //transcribes old book to new list using old count since old count is all books before the enw boook
                     for(int i=0;i<booksUser.length;i++){
-                        books2[i] = books[i];
+                        books2[i] = booksUser[i];
                     }
                     //sets last index to the new book
-                    books2[booksUser.length ] = bookWanted;
+                    books2[store.getCount()-1 ] = bookWantedUser;
+           
                     //updates orignial list
                     user.setBooks(books2);
+                
+
                     //updates quantity of book in library
                     if(store.getBooks()[index].getQuantity()>1){
                         store.getBooks()[index].setQuantity(store.getBooks()[index].getQuantity()-1);
                     }else{
                         store.removeBook(bookWanted);
                     }
-                    //check
-                    System.out.println(store.bookStoreBookInfo());
-                    System.out.println(store.bookStoreUserInfo());
-
+                    
                     
                 }else{
                     System.out.println("Sorry we dont have that book");
@@ -235,7 +236,6 @@ public class trying{
                 boolean have = false;
                 //set index of book wanted
                 int index = 0;
-
                 //display info for that book
                 //get list of book
                 Book[] books = store.getBooks();
@@ -259,20 +259,19 @@ public class trying{
                  
                     Book[] books2 = new Book[5 ];
                     //transcribes old book to new list using old count since old count is all books before the enw boook
-                    for(int i=0;i<booksUser.length;i++){
-                        if(books[index] != booksUser[i]){
-                            books2[i] = books[i];
-                        }else{
+                    for(int i=0;i<5;i++){
+                        if(books[index].getIsbn() == booksUser[i].getIsbn()){
+                          
+                     
                             books2[i] = null;
+                            break;
                         }
                     }
                     
                     //updates orignial list
                     user.setBooks(books2);
                     
-                    //check
-                    System.out.println(store.bookStoreBookInfo());
-                    System.out.println(store.bookStoreUserInfo());
+                   
 
                     
                 }else{
@@ -304,13 +303,7 @@ public class trying{
                     Book[] booksUser = user.getBooks();
                     Book[] books2 = new Book[5 ];
                     //transcribes old book to new list using old count since old count is all books before the enw boook
-                    for(int i=0;i<store.getCount();i++){
-                        if(books[index] != booksUser[i]){
-                            books2[i] = books[i];
-                        }else{
-                            books2[i] = null;
-                        }
-                    }
+                   
                     
                     //updates orignial list
                     user.setBooks(books2);
